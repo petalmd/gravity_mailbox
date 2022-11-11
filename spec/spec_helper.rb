@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'mail_web_catcher'
+require 'gravity_mailbox'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
