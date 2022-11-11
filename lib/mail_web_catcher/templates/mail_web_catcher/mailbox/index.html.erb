@@ -1,0 +1,26 @@
+<% content_for :style do %>
+  body, iframe {
+    height: 100vh;
+  }
+
+  iframe {
+    border: 0;
+    width: 100%;
+  }
+<% end %>
+
+<div class="columns mb-0 mt-0">
+  <div class="column is-one-quarter" style="max-height: 100vh; overflow: scroll">
+    <div class="section" style="padding: 1em;">
+      <%= button_to 'Clear mails', '/mails/clear', class: ['button', 'is-danger'], method: :post %>
+    </div>
+    <% @mails.each do |mail| %>
+      <%= render partial: 'mail', locals: { mail: mail } %>
+    <% end %>
+  </div>
+  <div class="column pb-0 pt-0">
+    <% if @mail %>
+      <iframe seamless name="messageBody" src="?part=true&id=<%= params[:id] %>"></iframe>
+    <% end %>
+  </div>
+</div>
