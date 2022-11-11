@@ -1,18 +1,19 @@
 # frozen_string_literal: true
 
-module MailWebCatcher
+module GravityMailbox
   class RailsCacheDeliveryMethod
-    MAILS_LIST_KEY = 'mail_web_catcher/list'
+    KEY_PREFIX = 'gravity_mailbox/'
+    MAILS_LIST_KEY = "#{KEY_PREFIX}list"
 
     def initialize(options)
       @options = options
     end
 
     def deliver!(mail)
-      key = "mail_web_catcher/#{mail.message_id}"
+      key = "#{KEY_PREFIX}#{mail.message_id}"
       Rails.cache.write(key, mail.encoded, expires_in: 1.week) # TODO: setting for expiration
       actual_list = self.class.mail_keys
-      Rails.cache.write('mail_web_catcher/list', actual_list << key)
+      Rails.cache.write(MAILS_LIST_KEY, actual_list << key)
     end
 
     def self.mails
@@ -24,7 +25,7 @@ module MailWebCatcher
     end
 
     def self.clear
-      Rails.cache.delete_matched('mail_web_catcher/*')
+      Rails.cache.delete_matched("#{KEY_PREFIX}*")
     end
 
     def self.mail_keys

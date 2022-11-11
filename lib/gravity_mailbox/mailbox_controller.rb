@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module MailWebCatcher
+module GravityMailbox
   class MailboxController < ActionController::Base
     self.view_paths = File.expand_path('templates', __dir__)
 

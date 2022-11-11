@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe MailWebCatcher do
+RSpec.describe GravityMailbox do
   it 'has a version number' do
-    expect(MailWebCatcher::VERSION).not_to be nil
+    expect(GravityMailbox::VERSION).not_to be nil
   end
 
   it 'does something useful' do

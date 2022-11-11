@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'lib/mail_web_catcher/version'
+require_relative 'lib/gravity_mailbox/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'mail_web_catcher'
-  spec.version       = MailWebCatcher::VERSION
+  spec.name          = 'gravity_mailbox'
+  spec.version       = GravityMailbox::VERSION
   spec.authors       = ['Jean-Francis Bastien']
   spec.email         = ['jfbastien@petalmd.com']
 
