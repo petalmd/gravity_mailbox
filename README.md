@@ -1,8 +1,7 @@
 # GravityMailbox
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/gravity_mailbox`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Development tools that aim to make it simple to visualize mail sent by your Rails app directly through your Rails app.
+It works in development and also in a staging environment by using the `Rails.cache` to store the mails.
 
 ## Installation
 
@@ -22,7 +21,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Config ActionMailer to use the RailsCacheDeliveryMethod.
+
+```ruby
+config.action_mailer.delivery_method = :gravity_mailbox_rails_cache
+config.action_mailer.perform_deliveries = true
+```
+
+Go to http://localhost:3000/mails to see the mails.
 
 ## Development
 
