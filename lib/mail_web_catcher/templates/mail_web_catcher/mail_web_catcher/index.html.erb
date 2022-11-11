@@ -1,5 +1,30 @@
+<% content_for :style do %>
+  body, iframe {
+    height: 100vh;
+  }
 
-<h1>My First Heading</h1>
-<%= content_tag 'h2', @text %>
-<p>My first paragraph.</p>
+  iframe {
+    border: 0;
+    width: 100%;
+  }
+<% end %>
 
+<div class="columns">
+  <div class="column is-one-quarter" style="max-height: 100vh; overflow: scroll">
+    <div class="section" style="padding: 1em;">
+      <%= button_to 'Clear mails', '/mails/clear', class: ['button', 'is-danger'], method: :post %>
+    </div>
+    <% @emails.each_with_index do |mail, index| %>
+      <div class="box <%= index == params[:index].to_i ? 'has-background-success-light' : '' %>">
+        <strong>Subject: </strong><%= link_to mail.subject, "?index=#{index}" %> <br>
+        <strong>To: </strong><%= mail.to %><br>
+        <strong>Date: </strong><%= I18n.l(mail.date, format: :long) %><br>
+      </div>
+    <% end %>
+  </div>
+  <div class="column pb-0 pt-0">
+    <% if @email %>
+      <iframe seamless name="messageBody" src="?part=true&index=<%= params[:index] %>"></iframe>
+    <% end %>
+  </div>
+</div>

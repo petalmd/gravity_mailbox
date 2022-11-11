@@ -13,6 +13,7 @@ module MailWebCatcher
     config.after_initialize do |app|
       app.routes.prepend do
         get "/mails" => "mail_web_catcher/mail_web_catcher#index", internal: true
+        post '/mails/clear' => 'mail_web_catcher/mail_web_catcher#clear', internal: true
       end
     end
   end
