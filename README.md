@@ -21,14 +21,15 @@ Or install it yourself as:
 
 ## Usage
 
-Config ActionMailer to use the RailsCacheDeliveryMethod.
+* Config ActionMailer to use the RailsCacheDeliveryMethod.
 
 ```ruby
 config.action_mailer.delivery_method = :gravity_mailbox_rails_cache
 config.action_mailer.perform_deliveries = true
 ```
 
-Go to http://localhost:3000/mails to see the mails.
+* Send mails
+* Go to http://localhost:3000/mails to see the mails.
 
 ## Development
 
@@ -38,7 +39,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/mail_web_catcher.
+Bug reports and pull requests are welcome on GitHub at https://github.com/petalmd/gravity_mailbox.
 
 ## License
 
