@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
+require_relative 'mailbox_controller'
+
 module GravityMailbox
-  class Railtie < Rails::Railtie # :nodoc:
+  class Railtie < ::Rails::Railtie # :nodoc:
     initializer 'gravity_mailbox.add_delivery_method' do
       ActiveSupport.on_load :action_mailer do
         ActionMailer::Base.add_delivery_method(
           :gravity_mailbox_rails_cache,
-          GravityMailbox::RailsCacheDeliveryMethod
+          RailsCacheDeliveryMethod
         )
       end
     end

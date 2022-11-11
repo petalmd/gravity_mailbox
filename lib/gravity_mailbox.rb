@@ -2,8 +2,7 @@
 
 require_relative 'gravity_mailbox/version'
 require_relative 'gravity_mailbox/rails_cache_delivery_method'
-require_relative 'gravity_mailbox/railtie'
-require_relative 'gravity_mailbox/mailbox_controller'
+require_relative 'gravity_mailbox/railtie' if defined?(Rails)
 
 module GravityMailbox
 end
