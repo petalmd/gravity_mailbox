@@ -28,8 +28,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
-
+  spec.add_dependency "actionmailer", "< 6.0" # TODO: set >= 5.2
+  spec.add_dependency 'railties', '< 6.0' # TODO: set >= 5.2
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html
 end
