@@ -1,19 +1,19 @@
+# frozen_string_literal: true
+
 module MailWebCatcher
   class MailWebCatcherController < ActionController::Base
-    self.view_paths = File.expand_path("templates", __dir__)
+    self.view_paths = File.expand_path('templates', __dir__)
 
     layout 'application'
 
     def index
       @emails = RailsCacheDeliveryMethod.mails
       @email = @emails[params[:index].to_i]
-      if @email
-        @part = find_preferred_part(request.format, Mime[:html], Mime[:text])
-      end
-      if params[:part]
-        response.content_type = 'text/html'
-        render plain: @email.part[1].body.decoded
-      end
+      @part = find_preferred_part(request.format, Mime[:html], Mime[:text]) if @email
+      return unless params[:part]
+
+      response.content_type = 'text/html'
+      render plain: email_body
     end
 
     def clear
@@ -23,16 +23,19 @@ module MailWebCatcher
 
     private
 
-    def find_preferred_part(*formats) # :doc:
+    def find_preferred_part(*formats)
       formats.each do |format|
-        if part = @email.find_first_mime_type(format)
-          return part
-        end
+        part = @email.find_first_mime_type(format)
+        return part if part
       end
 
-      if formats.any? { |f| @email.mime_type == f }
-        @email
-      end
+      return unless formats.any? { |f| @email.mime_type == f }
+
+      @email
+    end
+
+    def email_body
+      @email.part[1].body.decoded
     end
   end
 end

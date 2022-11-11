@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module MailWebCatcher
   class RailsCacheDeliveryMethod
-
     MAILS_LIST_KEY = 'mail_web_catcher/list'
 
     def initialize(options)
@@ -9,7 +10,7 @@ module MailWebCatcher
 
     def deliver!(mail)
       key = "mail_web_catcher/#{mail.message_id}"
-      Rails.cache.write(key, mail.encoded, expires_in: 1.week) # TODO setting for expiration
+      Rails.cache.write(key, mail.encoded, expires_in: 1.week) # TODO: setting for expiration
       actual_list = self.class.mail_keys
       Rails.cache.write('mail_web_catcher/list', actual_list << key)
     end
