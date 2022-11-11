@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     mail_web_catcher (0.1.0)
-      actionmailer (< 6.0)
-      railties (< 6.0)
+      actionmailer (< 6.1)
+      railties (< 6.1)
 
 GEM
   remote: https://rubygems.org/

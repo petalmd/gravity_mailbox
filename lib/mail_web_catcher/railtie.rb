@@ -9,5 +9,11 @@ module MailWebCatcher
         )
       end
     end
+
+    config.after_initialize do |app|
+      app.routes.prepend do
+        get "/mails" => "mail_web_catcher/mail_web_catcher#index", internal: true
+      end
+    end
   end
 end
