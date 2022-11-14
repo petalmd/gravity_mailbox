@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     gravity_mailbox (0.1.0)
-      actionmailer (< 6.1)
-      railties (< 6.1)
+      actionmailer (>= 5.2)
+      railties (>= 5.2)
 
 GEM
   remote: https://rubygems.org/
