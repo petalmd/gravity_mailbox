@@ -24,7 +24,7 @@ module GravityMailbox
       end.sort_by(&:date).reverse
     end
 
-    def self.clear
+    def self.delete_all
       Rails.cache.delete_matched("#{KEY_PREFIX}*")
     end
 

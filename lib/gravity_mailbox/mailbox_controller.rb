@@ -16,9 +16,9 @@ module GravityMailbox
       render plain: email_body
     end
 
-    def clear
-      RailsCacheDeliveryMethod.clear
-      redirect_to '/mails'
+    def delete_all
+      RailsCacheDeliveryMethod.delete_all
+      redirect_to '/gravity_mailbox'
     end
 
     private
