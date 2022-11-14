@@ -29,7 +29,7 @@ config.action_mailer.perform_deliveries = true
 ```
 
 * Send mails
-* Go to http://localhost:3000/mails to see the mails.
+* Go to http://localhost:3000/gravity_mailbox to see the mails.
 
 <img width="520" alt="image" src="https://user-images.githubusercontent.com/7858787/201705867-74888ae2-fa6d-4678-a911-134ae5527100.png">
 
