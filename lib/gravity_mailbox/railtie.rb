@@ -15,8 +15,8 @@ module GravityMailbox
 
     config.after_initialize do |app|
       app.routes.prepend do
-        get '/mails' => 'gravity_mailbox/mailbox#index', internal: true
-        post '/mails/clear' => 'gravity_mailbox/mailbox#clear', internal: true
+        get '/gravity_mailbox' => 'gravity_mailbox/mailbox#index', internal: true
+        post '/gravity_mailbox/clear' => 'gravity_mailbox/mailbox#clear', internal: true
       end
     end
   end
