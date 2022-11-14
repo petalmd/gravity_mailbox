@@ -31,6 +31,8 @@ config.action_mailer.perform_deliveries = true
 * Send mails
 * Go to http://localhost:3000/mails to see the mails.
 
+<img width="520" alt="image" src="https://user-images.githubusercontent.com/7858787/201705867-74888ae2-fa6d-4678-a911-134ae5527100.png">
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
