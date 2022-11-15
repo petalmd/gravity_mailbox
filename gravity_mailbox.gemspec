@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Jean-Francis Bastien']
   spec.email         = ['jfbastien@petalmd.com']
 
-  spec.summary       = 'Write a short summary, because RubyGems requires one.'
-  spec.description   = 'Write a longer description or delete this line.'
+  spec.summary       = 'Visualize mail sent by your Rails app directly through your Rails app.'
+  spec.description   = 'Development tools that aim to make it simple to visualize mail sent by your Rails app directly through your Rails app.'
   spec.homepage      = 'https://github.com/petalmd/gravity_mailbox'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.6.0')

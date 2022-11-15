@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/gravity_mailbox.svg)](https://badge.fury.io/rb/gravity_mailbox)
+
 # GravityMailbox
 
 Development tools that aim to make it simple to visualize mail sent by your Rails app directly through your Rails app.
