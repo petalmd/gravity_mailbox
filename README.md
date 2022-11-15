@@ -1,4 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/gravity_mailbox.svg)](https://badge.fury.io/rb/gravity_mailbox)
+[![Ruby](https://github.com/petalmd/gravity_mailbox/actions/workflows/main.yml/badge.svg)](https://github.com/petalmd/gravity_mailbox/actions/workflows/main.yml)
 
 # GravityMailbox
 
