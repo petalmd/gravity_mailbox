@@ -7,20 +7,73 @@
     border: 0;
     width: 100%;
   }
+
+  .mail-list-column {
+    height: 100vh;
+    overflow: scroll;
+    min-width: 20em;
+  }
+
+  .link-button {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    font-family: arial, sans-serif;
+    color: #000;
+    cursor: pointer;
+  }
 <% end %>
 
 <div class="columns mb-0 mt-0">
-  <div class="column is-one-quarter" style="max-height: 100vh; overflow: scroll">
-    <div class="section" style="padding: 1em;">
-      <%= button_to 'Delete all', '/gravity_mailbox/delete_all', class: ['button', 'is-danger'], method: :post %>
+  <div class="column is-one-quarter pt-0 pr-0 mail-list-column">
+    <div class="navbar has-background-info">
+      <div class="navbar-brand">
+        <h1 class="navbar-item title is-6 has-text-white">GravityMailbox</h1>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="dropdown is-right">
+              <div class="dropdown-trigger" style="width: 24px; height: 24px;">
+                 <span class="icon has-text-white has-text-centered" aria-controls="dropdown-menu">
+                    <ion-icon size="large" name="menu-outline"></ion-icon>
+                </span>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                  <div class="dropdown-item">
+                    <%= button_to '/gravity_mailbox/delete_all', class: ['link-button'], method: :post do %>
+                      <span class="icon-text">
+                        <span class="icon has-text-centered">
+                          <ion-icon name="trash-outline"></ion-icon>
+                        </span>
+                        <span>Delete all</span>
+                      </span>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <% @mails.each do |mail| %>
-      <%= render partial: 'mail', locals: { mail: mail } %>
-    <% end %>
+
+      <% @mails.each do |mail| %>
+        <%= render partial: 'mail', locals: { mail: mail } %>
+      <% end %>
   </div>
-  <div class="column pb-0 pt-0">
+  <div class="column pb-0 pt-0 pl-0">
     <% if @mail %>
       <iframe seamless name="messageBody" src="?part=true&id=<%= params[:id] %>"></iframe>
     <% end %>
   </div>
 </div>
+
+<script>
+  document.querySelector('.dropdown-trigger').addEventListener('click', function (event) {
+    event.stopPropagation();
+    event.preventDefault();
+    document.querySelector('.dropdown').classList.toggle('is-active');
+  });
+</script>

@@ -1,5 +1,13 @@
-<div class="box <%= mail.message_id == params[:id] ? 'has-background-success-light' : '' %>">
-  <strong>Subject: </strong><%= link_to mail.subject, "?id=#{mail.message_id}" %> <br>
-  <strong>To: </strong><%= mail.to.join(', ') %><br>
-  <strong>Date: </strong><%= I18n.l(mail.date, format: :long) %><br>
+<style>
+    /*.mail-list {*/
+    /*    padding-left: 1em;*/
+    /*    padding-right: 1em;*/
+    /*    padding-top: 1em;*/
+    /*}*/
+</style>
+<div class="p-4 mail-list <%= mail.message_id == params[:id] ? 'has-background-success-light' : '' %>">
+    <strong>Subject: </strong><%= link_to mail.subject, "?id=#{mail.message_id}" %> <br>
+    <strong>To: </strong><%= mail.to.join(', ') %><br>
+    <strong>Date: </strong><%= I18n.l(mail.date, format: :long) %><br>
+    <strong>Open in default mail app: </strong><%= link_to 'Open', "/gravity_mailbox/open?id=#{mail.message_id}" %><br>
 </div>

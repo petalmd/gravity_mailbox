@@ -16,6 +16,11 @@ module GravityMailbox
       render plain: email_body
     end
 
+    def open
+      @mail = RailsCacheDeliveryMethod.mail(params[:id])
+      send_data @mail, filename: 'email.eml'
+    end
+
     def delete_all
       RailsCacheDeliveryMethod.delete_all
       redirect_to '/gravity_mailbox'
