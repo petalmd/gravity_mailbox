@@ -4,8 +4,8 @@
         background-color: rgba(62, 142, 208, 0.08);
     }
 </style>
-<div class="p-4 mail-list <%= mail.message_id == params[:id] ? 'selected-mail' : '' %>">
-    <strong>Subject: </strong><%= link_to mail.subject, "?id=#{mail.message_id}" %> <br>
+<div class="p-4 mail-list-item <%= mail.message_id == params[:id] ? 'selected-mail' : '' %>" data-mail-id="<%= mail.message_id %>">
+    <strong>Subject: ABC </strong> <br>
     <strong>To: </strong><%= mail.to.join(', ') %><br>
     <strong>Date: </strong><%= I18n.l(mail.date, format: :long) %><br>
     <strong>Open in default mail app: </strong><%= link_to 'Open', "/gravity_mailbox/open?id=#{mail.message_id}" %><br>

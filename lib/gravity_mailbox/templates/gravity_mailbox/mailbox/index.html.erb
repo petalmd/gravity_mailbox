@@ -64,9 +64,7 @@
       <% end %>
   </div>
   <div class="column pb-0 pt-0 pl-0">
-    <% if @mail %>
-      <iframe seamless name="messageBody" src="?part=true&id=<%= params[:id] %>"></iframe>
-    <% end %>
+      <iframe id="iframe-mail-container" seamless name="messageBody" src="<%= params[:id] ? "?part=true&id=#{params[:id]}" : '' %>"></iframe>
   </div>
 </div>
 
@@ -76,4 +74,13 @@
     event.preventDefault();
     document.querySelector('.dropdown').classList.toggle('is-active');
   });
+
+  let mailItems = document.querySelectorAll(".mail-list-item")
+  mailItems.forEach(mailItem => {
+  mailItem.addEventListener("click", () => {
+      document.querySelector("#iframe-mail-container").src = "/gravity_mailbox?part=true&id=" + mailItem.dataset.mailId
+      mailItems.forEach(mailItem => mailItem.classList.remove("selected-mail"))
+      mailItem.classList.add("selected-mail")
+  })
+  })
 </script>
