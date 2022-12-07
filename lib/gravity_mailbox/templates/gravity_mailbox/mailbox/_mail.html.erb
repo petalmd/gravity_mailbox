@@ -1,12 +1,26 @@
 <style>
     .selected-mail {
         box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-        background-color: rgba(62, 142, 208, 0.08);
+        background-color: rgba(62, 142, 208, 0.1);
     }
 </style>
 <div class="p-4 mail-list-item <%= mail.message_id == params[:id] ? 'selected-mail' : '' %>" data-mail-id="<%= mail.message_id %>">
-    <strong>Subject: ABC </strong> <br>
-    <strong>To: </strong><%= mail.to.join(', ') %><br>
-    <strong>Date: </strong><%= I18n.l(mail.date, format: :long) %><br>
-    <strong>Open in default mail app: </strong><%= link_to 'Open', "/gravity_mailbox/open?id=#{mail.message_id}" %><br>
+  <div class="level" style="margin-bottom: 12px">
+    <div class="level-left">
+      <span class="has-text-weight-semibold	"><%= mail.subject %></span>
+    </div>
+    <div class="level-right">
+
+    </div>
+  </div>
+
+  <% mail.to.each do |email_to| %>
+    <%= content_tag(:p, email_to, class: ['has-text-weight-light'], style: "font-size: 0.85rem") %>
+  <% end %>
+  <div class="has-text-right">
+    <span class="is-size-7" title="<%= I18n.l(mail.date, format: :long) %>">
+        <%= time_ago_in_words(mail.date) %>
+      </span>
+  </div>
+<!--    <strong>Open in default mail app: </strong><%#= link_to 'Open', "/gravity_mailbox/open?id=#{mail.message_id}" %><br>-->
 </div>
