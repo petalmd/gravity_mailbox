@@ -59,8 +59,8 @@
       </div>
     </div>
 
-      <% @mails.each do |mail| %>
-        <%= render partial: 'mail', locals: { mail: mail } %>
+      <% @mails.each_with_index do |mail, index| %>
+        <%= render partial: 'mail', locals: { mail: mail, index: index } %>
       <% end %>
   </div>
   <div class="column pb-0 pt-0 pl-0">
@@ -70,8 +70,7 @@
 
 <script>
   document.querySelector('.dropdown-trigger').addEventListener('click', function (event) {
-    event.stopPropagation();
-    event.preventDefault();
+
     document.querySelector('.dropdown').classList.toggle('is-active');
   });
 
@@ -81,6 +80,12 @@
       document.querySelector("#iframe-mail-container").src = "/gravity_mailbox?part=true&id=" + mailItem.dataset.mailId
       mailItems.forEach(mailItem => mailItem.classList.remove("selected-mail"))
       mailItem.classList.add("selected-mail")
+    })
   })
-  })
+
+  document.addEventListener("click", (e) => {
+    document.querySelectorAll(".dropdown").forEach((dropdown) => {
+        dropdown.classList.remove("is-active")
+    })
+  });
 </script>

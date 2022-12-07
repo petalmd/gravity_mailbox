@@ -4,13 +4,34 @@
         background-color: rgba(62, 142, 208, 0.1);
     }
 </style>
+
 <div class="p-4 mail-list-item <%= mail.message_id == params[:id] ? 'selected-mail' : '' %>" data-mail-id="<%= mail.message_id %>">
   <div class="level" style="margin-bottom: 12px">
     <div class="level-left">
       <span class="has-text-weight-semibold	"><%= mail.subject %></span>
     </div>
     <div class="level-right">
-
+      <div id="<%= "mail-menu-#{index}" %>" class="dropdown is-right">
+        <div id="<%= "mail-menu-icon-#{index}" %>" class="dropdown-trigger" style="width: 24px; height: 24px;">
+          <span class="icon">
+            <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+          </span>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <div class="dropdown-item">
+              <%= button_to "/gravity_mailbox/delete?id=#{mail.message_id}", class: ['link-button'], method: :post do %>
+                    <span class="icon-text">
+                      <span class="icon has-text-centered">
+                        <ion-icon name="trash-outline"></ion-icon>
+                      </span>
+                      <span>Delete</span>
+                    </span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -24,3 +45,15 @@
   </div>
 <!--    <strong>Open in default mail app: </strong><%#= link_to 'Open', "/gravity_mailbox/open?id=#{mail.message_id}" %><br>-->
 </div>
+
+<script>
+  document.querySelector('<%= "#mail-menu-icon-#{index}" %>').addEventListener('click', function (e) {
+    e.stopPropagation();
+    document.querySelector('<%= "#mail-menu-#{index}" %>').classList.toggle('is-active');
+    document.querySelectorAll(".dropdown").forEach((dropdown) => {
+        if(dropdown != document.querySelector('<%= "#mail-menu-#{index}" %>')) {
+            dropdown.classList.remove('is-active');
+        }
+    })
+  });
+</script>
