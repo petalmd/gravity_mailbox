@@ -25,7 +25,14 @@ module GravityMailbox
     end
 
     def self.mail(id)
-      Rails.cache.read("#{KEY_PREFIX}#{id}")
+      Mail.new(Rails.cache.read("#{KEY_PREFIX}#{id}"))
+    end
+
+    def self.delete(id)
+      Rails.cache.delete("#{KEY_PREFIX}#{id}")
+      actual_list = mail_keys
+      actual_list.delete("#{KEY_PREFIX}#{id}")
+      Rails.cache.write(MAILS_LIST_KEY, actual_list)
     end
 
     def self.delete_all
