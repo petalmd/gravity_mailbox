@@ -1,14 +1,7 @@
-<style>
-    .selected-mail {
-        box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-        background-color: rgba(62, 142, 208, 0.1);
-    }
-</style>
-
 <div class="p-4 mail-list-item <%= mail.message_id == params[:id] ? 'selected-mail' : '' %>" data-mail-id="<%= mail.message_id %>">
   <div class="level" style="margin-bottom: 12px">
     <div class="level-left">
-      <span class="has-text-weight-semibold	"><%= mail.subject %></span>
+      <span class="has-text-weight-semibold	mail-subject"><%= mail.subject %></span>
     </div>
     <div class="level-right">
       <div id="<%= "mail-menu-#{index}" %>" class="dropdown is-right">
@@ -54,7 +47,6 @@
         <%= time_ago_in_words(mail.date) %>
       </span>
   </div>
-<!--    <strong>Open in default mail app: </strong><%#= link_to 'Open', "/gravity_mailbox/open?id=#{mail.message_id}" %><br>-->
 </div>
 
 <script>

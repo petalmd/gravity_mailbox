@@ -22,6 +22,11 @@
     color: #000;
     cursor: pointer;
   }
+
+  .selected-mail {
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    background-color: rgba(62, 142, 208, 0.1);
+  }
 <% end %>
 
 <div class="columns mb-0 mt-0">
@@ -69,7 +74,7 @@
 </div>
 
 <script>
-  document.querySelector('.dropdown-trigger').addEventListener('click', function (event) {
+  document.querySelector('.dropdown-trigger').addEventListener('click', function (e) {
 
     document.querySelector('.dropdown').classList.toggle('is-active');
   });
