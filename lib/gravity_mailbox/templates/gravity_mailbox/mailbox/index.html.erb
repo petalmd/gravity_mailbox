@@ -41,7 +41,7 @@
       <div class="navbar-menu">
         <div class="navbar-end">
           <div class="navbar-item">
-            <div class="dropdown is-right">
+            <div class="dropdown is-right" id="toolbar-dropdown">
               <div class="dropdown-trigger" style="width: 24px; height: 24px;">
                  <span class="icon has-text-white has-text-centered" aria-controls="dropdown-menu">
                     <ion-icon size="large" name="menu-outline"></ion-icon>
@@ -77,10 +77,11 @@
 </div>
 
 <script>
-  // Toolbar menu
-  document.querySelector('.dropdown-trigger').addEventListener('click', function (e) {
-    document.querySelector('.dropdown').classList.toggle('is-active');
-  });
+  function closeAllOtherDropdown(e) {
+      document.querySelectorAll(".dropdown").forEach((dropdown) => {
+          dropdown.classList.remove('is-active');
+      })
+  }
 
   // Click on mail and change iframe src
   let mailItems = document.querySelectorAll(".mail-list-item")
@@ -100,16 +101,11 @@
   });
 
   // Each mail menu dropdown
-  document.querySelectorAll('.mail-dropdown-trigger').forEach((mailListItem) => {
-      mailListItem.addEventListener('click', function (e) {
-          let mailIndex = mailListItem.dataset.mailIndex
+  document.querySelectorAll('.dropdown-trigger').forEach((dropdown) => {
+      dropdown.addEventListener('click', function (e) {
+          closeAllOtherDropdown(e)
+          e.target.closest(".dropdown").classList.toggle('is-active');
           e.stopPropagation();
-          document.querySelector('#mail-menu-' + mailIndex).classList.toggle('is-active');
-          document.querySelectorAll(".dropdown").forEach((dropdown) => {
-              if(dropdown != document.querySelector('#mail-menu-' + mailIndex)) {
-                  dropdown.classList.remove('is-active');
-              }
-          })
       })
     })
 </script>
