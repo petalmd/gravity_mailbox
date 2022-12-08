@@ -24,8 +24,13 @@
   }
 
   .selected-mail {
-    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
-    background-color: rgba(62, 142, 208, 0.1);
+  background-color: #ffffff!important;
+  border-top: hsl(204deg 96% 84%) 1px solid;
+  border-bottom: hsl(204deg 96% 84%) 1px solid;
+  }
+
+  .mail-list-item {
+    background-color: hsl(206deg 100% 98%);
   }
 <% end %>
 
@@ -75,7 +80,6 @@
 
 <script>
   document.querySelector('.dropdown-trigger').addEventListener('click', function (e) {
-
     document.querySelector('.dropdown').classList.toggle('is-active');
   });
 
