@@ -17,6 +17,8 @@ module GravityMailbox
       app.routes.prepend do
         get '/gravity_mailbox' => 'gravity_mailbox/mailbox#index', internal: true
         post '/gravity_mailbox/delete_all' => 'gravity_mailbox/mailbox#delete_all', internal: true
+        get '/gravity_mailbox/download_eml' => 'gravity_mailbox/mailbox#download_eml', internal: true
+        post '/gravity_mailbox/delete' => 'gravity_mailbox/mailbox#delete', internal: true
       end
     end
   end

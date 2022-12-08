@@ -1,5 +1,51 @@
-<div class="box <%= mail.message_id == params[:id] ? 'has-background-success-light' : '' %>">
-  <strong>Subject: </strong><%= link_to mail.subject, "?id=#{mail.message_id}" %> <br>
-  <strong>To: </strong><%= mail.to.join(', ') %><br>
-  <strong>Date: </strong><%= I18n.l(mail.date, format: :long) %><br>
+
+<div class="p-4 mail-list-item <%= mail.message_id == params[:id] ? 'selected-mail' : '' %>" data-mail-id="<%= mail.message_id %>">
+  <div class="level" style="margin-bottom: 12px">
+    <div class="level-left" style="width: 80%">
+      <span class="has-text-weight-semibold	mail-subject"><%= mail.subject %></span>
+    </div>
+    <div class="level-right">
+      <div class="dropdown is-right">
+        <div class="dropdown-trigger" style="width: 24px; height: 24px;">
+          <span class="icon">
+            <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+          </span>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <div class="dropdown-item">
+              <%= link_to "/gravity_mailbox/download_eml?id=#{mail.message_id}", class: ['link-button'] do %>
+                    <span class="icon-text">
+                      <span class="icon has-text-centered">
+                        <ion-icon name="download-outline"></ion-icon>
+                      </span>
+                      <span>Download .eml</span>
+                    </span>
+              <% end %>
+            </div>
+
+            <div class="dropdown-item">
+              <%= button_to "/gravity_mailbox/delete?id=#{mail.message_id}", class: ['link-button'], method: :post do %>
+                    <span class="icon-text">
+                      <span class="icon has-text-centered">
+                        <ion-icon name="trash-outline"></ion-icon>
+                      </span>
+                      <span>Delete</span>
+                    </span>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% mail.to.each do |email_to| %>
+    <%= content_tag(:p, email_to, class: ['has-text-weight-light'], style: "font-size: 0.85rem") %>
+  <% end %>
+  <div class="has-text-right">
+    <span class="is-size-7" title="<%= I18n.l(mail.date, format: :long) %>">
+        <%= time_ago_in_words(mail.date) %>
+      </span>
+  </div>
 </div>
