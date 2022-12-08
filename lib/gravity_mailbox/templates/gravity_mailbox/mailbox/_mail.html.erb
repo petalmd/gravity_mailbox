@@ -1,3 +1,4 @@
+
 <div class="p-4 mail-list-item <%= mail.message_id == params[:id] ? 'selected-mail' : '' %>" data-mail-id="<%= mail.message_id %>">
   <div class="level" style="margin-bottom: 12px">
     <div class="level-left">
@@ -5,7 +6,7 @@
     </div>
     <div class="level-right">
       <div id="<%= "mail-menu-#{index}" %>" class="dropdown is-right">
-        <div id="<%= "mail-menu-icon-#{index}" %>" class="dropdown-trigger" style="width: 24px; height: 24px;">
+        <div id="<%= "mail-menu-icon-#{index}" %>" class="mail-dropdown-trigger" data-mail-index="<%= index %>" style="width: 24px; height: 24px;">
           <span class="icon">
             <ion-icon name="ellipsis-vertical-outline"></ion-icon>
           </span>
@@ -48,15 +49,3 @@
       </span>
   </div>
 </div>
-
-<script>
-  document.querySelector('<%= "#mail-menu-icon-#{index}" %>').addEventListener('click', function (e) {
-    e.stopPropagation();
-    document.querySelector('<%= "#mail-menu-#{index}" %>').classList.toggle('is-active');
-    document.querySelectorAll(".dropdown").forEach((dropdown) => {
-        if(dropdown != document.querySelector('<%= "#mail-menu-#{index}" %>')) {
-            dropdown.classList.remove('is-active');
-        }
-    })
-  });
-</script>

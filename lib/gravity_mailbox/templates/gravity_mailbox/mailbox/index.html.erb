@@ -79,10 +79,12 @@
 </div>
 
 <script>
+  // Toolbar menu
   document.querySelector('.dropdown-trigger').addEventListener('click', function (e) {
     document.querySelector('.dropdown').classList.toggle('is-active');
   });
 
+  // Click on mail and change iframe src
   let mailItems = document.querySelectorAll(".mail-list-item")
   mailItems.forEach(mailItem => {
   mailItem.addEventListener("click", () => {
@@ -92,9 +94,24 @@
     })
   })
 
+  // Close all dropdowns if the user clicks outside of them
   document.addEventListener("click", (e) => {
     document.querySelectorAll(".dropdown").forEach((dropdown) => {
         dropdown.classList.remove("is-active")
     })
   });
+
+  // Each mail menu dropdown
+  document.querySelectorAll('.mail-dropdown-trigger').forEach((mailListItem) => {
+      mailListItem.addEventListener('click', function (e) {
+          let mailIndex = mailListItem.dataset.mailIndex
+          e.stopPropagation();
+          document.querySelector('#mail-menu-' + mailIndex).classList.toggle('is-active');
+          document.querySelectorAll(".dropdown").forEach((dropdown) => {
+              if(dropdown != document.querySelector('#mail-menu-' + mailIndex)) {
+                  dropdown.classList.remove('is-active');
+              }
+          })
+      })
+    })
 </script>
