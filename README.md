@@ -36,8 +36,9 @@ config.action_mailer.perform_deliveries = true
 * Send mails
 * Go to http://localhost:3000/gravity_mailbox to see the mails.
 
-<img width="520" alt="image" src="https://user-images.githubusercontent.com/7858787/206336575-e1455a43-154d-4632-bc80-ecb849e2e224.png">
-
+<p align="center">
+    <img width="520" alt="image" src="https://user-images.githubusercontent.com/7858787/213796119-a22ac9da-3943-4cd0-95e6-2fb724de999a.png">
+</p>
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
