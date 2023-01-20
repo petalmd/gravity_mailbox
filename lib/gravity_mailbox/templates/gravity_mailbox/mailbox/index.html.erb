@@ -1,11 +1,19 @@
 <% content_for :style do %>
-  body, iframe {
+    body, iframe {
     height: 100vh;
   }
 
   iframe {
     border: 0;
     width: 100%;
+  }
+
+  .navbar {
+    background-color: #007bff !important;
+  }
+
+  .navbar-brand > h1 {
+    font-family: 'Righteous', cursive !important;
   }
 
   .mail-list-column {
@@ -21,14 +29,42 @@
     font-family: arial, sans-serif;
     color: #000;
     cursor: pointer;
-  }
-
-  .selected-mail {
-    background-color: #ffffff!important;
+    width: 100%;
+    text-align: left;
   }
 
   .mail-list-item {
-    background-color: hsl(206deg 27% 96%);
+    background-color: #fff!important;
+    padding: 1rem;
+    box-shadow: inset 0 -1px 0 0 rgb(100 121 143 / 12%) !important;
+  }
+
+  .mail-list-item.selected-mail {
+    background-color: #ffffff!important;
+    border-left: 8px solid #ed900c;
+   padding-left: calc(1rem - 8px);
+  }
+
+  .mail-list-item:hover {
+    cursor: pointer !important;
+    border-left: 8px solid lightgrey;
+    padding-left: calc(1rem - 8px);
+  }
+
+  .mail-list-item.selected-mail:hover {
+    border-left: 8px solid #ed900c;
+  }
+
+  #iframe-mail-container {
+    background-color: whitesmoke !important;
+  }
+
+  .dropdown-trigger:hover {
+    cursor: pointer !important;
+  }
+
+  .dropdown-item:hover {
+    background-color: whitesmoke !important;
   }
 <% end %>
 
@@ -67,45 +103,71 @@
       </div>
     </div>
 
-      <% @mails.each_with_index do |mail, index| %>
-        <%= render partial: 'mail', locals: { mail: mail, index: index } %>
-      <% end %>
+    <% @mails.each_with_index do |mail, index| %>
+      <%= render partial: 'mail', locals: { mail: mail, index: index } %>
+    <% end %>
   </div>
   <div class="column pb-0 pt-0 pl-0">
-      <iframe id="iframe-mail-container" seamless name="messageBody" src="<%= params[:id] ? "?part=true&id=#{params[:id]}" : '' %>"></iframe>
+    <iframe id="iframe-mail-container" seamless name="messageBody" src="<%= params[:id] ? "?part=true&id=#{params[:id]}" : '' %>"></iframe>
   </div>
 </div>
 
 <script>
-  function closeAllOtherDropdown(e) {
-      document.querySelectorAll(".dropdown").forEach((dropdown) => {
-          dropdown.classList.remove('is-active');
-      })
-  }
+    function closeAllOtherDropdown(e) {
+        document.querySelectorAll(".dropdown").forEach((dropdown) => {
+            dropdown.classList.remove('is-active');
+        })
+    }
 
-  // Click on mail and change iframe src
-  let mailItems = document.querySelectorAll(".mail-list-item")
-  mailItems.forEach(mailItem => {
-  mailItem.addEventListener("click", () => {
-      document.querySelector("#iframe-mail-container").src = "/gravity_mailbox?part=true&id=" + mailItem.dataset.mailId
-      mailItems.forEach(mailItem => mailItem.classList.remove("selected-mail"))
-      mailItem.classList.add("selected-mail")
+    // Click on mail and change iframe src
+    let mailItems = document.querySelectorAll(".mail-list-item")
+    mailItems.forEach(mailItem => {
+        mailItem.addEventListener("click", () => {
+            document.querySelector("#iframe-mail-container").src = "/gravity_mailbox?part=true&id=" + mailItem.dataset.mailId
+            mailItems.forEach(mailItem => mailItem.classList.remove("selected-mail"))
+            mailItem.classList.add("selected-mail")
+        })
     })
-  })
 
-  // Close all dropdowns if the user clicks outside of them
-  document.addEventListener("click", (e) => {
-    document.querySelectorAll(".dropdown").forEach((dropdown) => {
-        dropdown.classList.remove("is-active")
-    })
-  });
+    // Close all dropdowns if the user clicks outside of them
+    document.addEventListener("click", (e) => {
+        document.querySelectorAll(".dropdown").forEach((dropdown) => {
+            dropdown.classList.remove("is-active")
+        })
+    });
 
-  // Each mail menu dropdown
-  document.querySelectorAll('.dropdown-trigger').forEach((dropdown) => {
-      dropdown.addEventListener('click', function (e) {
-          closeAllOtherDropdown(e)
-          e.target.closest(".dropdown").classList.toggle('is-active');
-          e.stopPropagation();
-      })
+    // Each mail menu dropdown
+    document.querySelectorAll('.dropdown-trigger').forEach((dropdown) => {
+        dropdown.addEventListener('click', function (e) {
+            closeAllOtherDropdown(e)
+            e.target.closest(".dropdown").classList.toggle('is-active');
+            e.stopPropagation();
+        })
     })
+
+    function displayAutomaticallyTheFirstEmail() {
+        const mailItems = document.querySelectorAll(".mail-list-item");
+        if (mailItems.length) {
+            const mailItem = mailItems[0];
+            document.querySelector("#iframe-mail-container").src = "/gravity_mailbox?part=true&id=" + mailItem.dataset.mailId;
+            mailItem.classList.add("selected-mail");
+        } else {
+            const iframe = document.querySelector("#iframe-mail-container");
+
+            const iframeBody = iframe.contentDocument.body;
+            if (iframeBody) {
+                const p = document.createElement('p');
+                p.textContent = "No email received yet.";
+                p.style.fontFamily = "sans-serif";
+                p.style.fontSize = "20px";
+                p.style.fontWeight = "100";
+                iframeBody.appendChild(p);
+                iframeBody.style.display = "flex";
+                iframeBody.style.justifyContent = "center";
+                iframeBody.style.alignItems = "center";
+            }
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", displayAutomaticallyTheFirstEmail);
 </script>
