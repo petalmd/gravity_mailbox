@@ -2,6 +2,8 @@
 
 ## main (unreleased)
 
+## v0.3.0 (2023-01-20)
+
 * New layout and style ([#12](https://github.com/petalmd/gravity_mailbox/pull/12))
 
 ## v0.2.0 (2022-12-15)
