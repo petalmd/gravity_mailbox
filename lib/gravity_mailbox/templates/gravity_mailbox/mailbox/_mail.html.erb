@@ -1,5 +1,5 @@
 
-<div class="p-4 mail-list-item <%= mail.message_id == params[:id] ? 'selected-mail' : '' %>" data-mail-id="<%= mail.message_id %>">
+<div class="mail-list-item <%= mail.message_id == params[:id] ? 'selected-mail' : '' %>" data-mail-id="<%= mail.message_id %>">
   <div class="level" style="margin-bottom: 12px">
     <div class="level-left" style="width: 80%">
       <span class="has-text-weight-semibold	mail-subject"><%= mail.subject %></span>

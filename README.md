@@ -1,7 +1,9 @@
 [![Gem Version](https://badge.fury.io/rb/gravity_mailbox.svg)](https://badge.fury.io/rb/gravity_mailbox)
 [![Ruby](https://github.com/petalmd/gravity_mailbox/actions/workflows/main.yml/badge.svg)](https://github.com/petalmd/gravity_mailbox/actions/workflows/main.yml)
 
-# GravityMailbox
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/7858787/213794938-f55aef73-ce49-45b5-a388-d16f2435de15.png" />
+</p>
 
 Development tools that aim to make it simple to visualize mail sent by your Rails app directly through your Rails app.
 It works in development and also in a staging environment by using the `Rails.cache` to store the mails.
