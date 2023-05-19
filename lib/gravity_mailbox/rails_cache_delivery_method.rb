@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'mail'
+
 module GravityMailbox
   class RailsCacheDeliveryMethod
     KEY_PREFIX = 'gravity_mailbox/'

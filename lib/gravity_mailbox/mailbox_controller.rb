@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'action_controller'
+
 module GravityMailbox
   class MailboxController < ActionController::Base
     self.view_paths = File.expand_path('templates', __dir__)

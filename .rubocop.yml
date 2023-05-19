@@ -1,5 +1,9 @@
+require:
+  - rubocop-rspec
+
 AllCops:
   NewCops: enable
+  SuggestExtensions: false
 
 Layout/LineLength:
   Max: 120
