@@ -2,6 +2,8 @@
 
 ## main (unreleased)
 
+* Initialize specs. ([#18](https://github.com/petalmd/gravity_mailbox/pull/18))
+
 ## v0.3.0 (2023-01-20)
 
 * New layout and style ([#12](https://github.com/petalmd/gravity_mailbox/pull/12))
