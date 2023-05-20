@@ -47,7 +47,7 @@ RSpec.describe GravityMailbox::MailboxController, type: :controller do
         get :index, params: { id: message_id, part: true }
         expect(response).to have_http_status :ok
         expect(response.content_type).to match(%r{text/html})
-        expect(response).to_not render_template(:index)
+        expect(response).not_to render_template(:index)
         expect(assigns(:mail)).to eq stub_mail
         expect(response.body).to eq 'body'
       end
@@ -57,13 +57,7 @@ RSpec.describe GravityMailbox::MailboxController, type: :controller do
           Mail.new.tap do |m|
             m.message_id = message_id
             m.content_type = 'text/html'
-            m.body = <<-HTML
-              <html>
-                <body>
-                  <p>html part</p>
-                </body> 
-              </html>
-            HTML
+            m.body = '<h1>This is HTML</h1>'
           end
         end
 
@@ -71,7 +65,7 @@ RSpec.describe GravityMailbox::MailboxController, type: :controller do
           get :index, params: { id: message_id, part: true }
           expect(response).to have_http_status :ok
           expect(response.content_type).to match(%r{text/html})
-          expect(response).to_not render_template(:index)
+          expect(response).not_to render_template(:index)
           expect(assigns(:mail)).to eq stub_mail
           expect(response.body).to eq stub_mail.body.decoded
         end
@@ -98,7 +92,6 @@ RSpec.describe GravityMailbox::MailboxController, type: :controller do
           m.text_part = text_part
           m.html_part = html_part
         end
-
       end
       let(:stub_mails) { [stub_mail] }
 
@@ -110,7 +103,7 @@ RSpec.describe GravityMailbox::MailboxController, type: :controller do
         get :index, params: { id: message_id, part: true }, format: :html
         expect(response).to have_http_status :ok
         expect(response.content_type).to match(%r{text/html})
-        expect(response).to_not render_template(:index)
+        expect(response).not_to render_template(:index)
         expect(assigns(:mail)).to eq stub_mail
         expect(response.body).to eq html_part.body.decoded
       end
@@ -119,7 +112,7 @@ RSpec.describe GravityMailbox::MailboxController, type: :controller do
         get :index, params: { id: message_id, part: true }, format: :text
         expect(response).to have_http_status :ok
         expect(response.content_type).to match(%r{text/html})
-        expect(response).to_not render_template(:index)
+        expect(response).not_to render_template(:index)
         expect(assigns(:mail)).to eq stub_mail
         expect(response.body).to eq text_part.body.decoded
       end
