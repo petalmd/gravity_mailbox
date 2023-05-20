@@ -10,7 +10,7 @@ Combustion.initialize!(:action_controller, :action_mailer) do
   config.cache_store = :null_store
 end
 
-# require 'rspec/rails'
+require 'rspec/rails'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
