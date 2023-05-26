@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
+require 'combustion'
 require 'gravity_mailbox'
+require 'action_mailer'
+
+Combustion.initialize!(:action_controller, :action_mailer) do
+  config.action_mailer.delivery_method = :gravity_mailbox_rails_cache
+  config.action_mailer.perform_deliveries = true
+  config.cache_store = :null_store
+end
+
+require 'rspec/rails'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
+require 'mail'
+
 module GravityMailbox
   class RailsCacheDeliveryMethod
     KEY_PREFIX = 'gravity_mailbox/'
     MAILS_LIST_KEY = "#{KEY_PREFIX}list"
 
-    def initialize(options)
-      @options = options
+    attr_accessor :settings
+
+    def initialize(settings)
+      @settings = settings
     end
 
     def deliver!(mail)

@@ -1,0 +1,5 @@
+<h1><%= link_to 'GravityMailbox', '/gravity_mailbox' %></h1>
+
+<%= form_with url: send_mail_path do |f| %>
+  <%= f.submit 'Send Welcome mail' %>
+<% end %>

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'action_controller'
+
 module GravityMailbox
   class MailboxController < ActionController::Base
     self.view_paths = File.expand_path('templates', __dir__)
@@ -9,11 +11,11 @@ module GravityMailbox
     before_action :set_mails, only: %i[index]
 
     def index
-      @part = find_preferred_part(request.format, Mime[:html], Mime[:text]) if @mail
+      @part = find_preferred_part(*[request.format, Mime[:html], Mime[:text]].uniq) if @mail
       return unless params[:part]
 
       response.content_type = 'text/html'
-      render plain: email_body
+      render plain: @part&.decoded
     end
 
     def download_eml
@@ -34,18 +36,14 @@ module GravityMailbox
     private
 
     def find_preferred_part(*formats)
-      formats.each do |format|
-        part = @mail.find_first_mime_type(format)
-        return part if part
+      if @mail.multipart?
+        formats.each do |format|
+          part = @mail.find_first_mime_type(format)
+          return part if part
+        end
+      elsif formats.include?(@mail.mime_type)
+        @mail.body
       end
-
-      return unless formats.any? { |f| @mail.mime_type == f }
-
-      @mail
-    end
-
-    def email_body
-      @mail.part[1].body.decoded
     end
 
     def set_mails
