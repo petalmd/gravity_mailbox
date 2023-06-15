@@ -2,6 +2,7 @@
 
 ## main (unreleased)
 
+* Railtie to Engine. ([#19](https://github.com/petalmd/gravity_mailbox/pull/19))
 * Initialize specs. ([#18](https://github.com/petalmd/gravity_mailbox/pull/18))
 
 ## v0.3.0 (2023-01-20)
