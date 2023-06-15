@@ -29,8 +29,16 @@ Or install it yourself as:
 * Config ActionMailer to use the RailsCacheDeliveryMethod.
 
 ```ruby
+# config/environments/development.rb
 config.action_mailer.delivery_method = :gravity_mailbox_rails_cache
 config.action_mailer.perform_deliveries = true
+```
+
+* Mount the Engine
+
+```ruby
+# config/routes.rb
+mount GravityMailbox::Engine => "/gravity_mailbox"
 ```
 
 * Send mails
