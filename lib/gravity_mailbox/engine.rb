@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'mailbox_controller'
+require 'rails'
 
 module GravityMailbox
   class Engine < ::Rails::Engine # :nodoc:

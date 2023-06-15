@@ -4,9 +4,7 @@ require 'action_controller'
 
 module GravityMailbox
   class MailboxController < ActionController::Base
-    self.view_paths = File.expand_path('templates', __dir__)
-
-    layout 'application'
+    layout 'gravity_mailbox'
 
     before_action :set_mails, only: %i[index]
 

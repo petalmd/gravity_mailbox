@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe GravityMailbox::MailboxController, type: :controller do
+  before do
+    @routes = GravityMailbox::Engine.routes
+  end
+
   describe 'GET #index' do
     context 'with no mail params' do
       let(:stub_mails) { 'stub mails' }
