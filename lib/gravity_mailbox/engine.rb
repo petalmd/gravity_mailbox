@@ -24,7 +24,6 @@ module GravityMailbox
     # end
     #
 
-
     # config.after_initialize do |app|
     #   app.routes.prepend do
     #     get '/gravity_mailbox' => 'gravity_mailbox/mailbox#index', internal: true
