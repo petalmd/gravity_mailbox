@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'combustion'
 require 'gravity_mailbox'
+require 'combustion'
 require 'action_mailer'
 
 Combustion.initialize!(:action_controller, :action_mailer) do

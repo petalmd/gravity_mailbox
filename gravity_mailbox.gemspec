@@ -27,6 +27,5 @@ Gem::Specification.new do |spec|
     'rubygems_mfa_required' => 'true'
   }
 
-  spec.add_dependency 'actionmailer', '>= 5.2'
-  spec.add_dependency 'railties', '>= 5.2'
+  spec.add_dependency 'rails', '>= 6.0'
 end
