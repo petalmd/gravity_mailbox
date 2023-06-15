@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe GravityMailbox::MailboxController, type: :controller do
+RSpec.describe GravityMailbox::MailboxController, type: :controller do # rubocop:disable RSpec/Rails/InferredSpecType
   before do
     @routes = GravityMailbox::Engine.routes
   end

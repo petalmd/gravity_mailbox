@@ -14,5 +14,3 @@ RSpec/MultipleExpectations:
   Max: 5
 RSpec/NestedGroups:
     Max: 5
-RSpec/Rails/InferredSpecType:
-  Enabled: false

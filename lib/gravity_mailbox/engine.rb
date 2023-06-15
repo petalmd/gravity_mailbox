@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails'
+require_relative 'rails_cache_delivery_method'
 
 module GravityMailbox
   class Engine < ::Rails::Engine # :nodoc:
