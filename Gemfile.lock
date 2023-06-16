@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gravity_mailbox (0.3.0)
+    gravity_mailbox (0.4.0)
       rails (>= 6.0)
 
 GEM
