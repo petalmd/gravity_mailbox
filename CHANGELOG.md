@@ -2,6 +2,8 @@
 
 ## main (unreleased)
 
+* Add config and app folders in files gemspec. ([#21](https://github.com/petalmd/gravity_mailbox/pull/21))
+
 ## v0.4.0 (2023-06-16)
 
 * Railtie to Engine. ([#19](https://github.com/petalmd/gravity_mailbox/pull/19))
