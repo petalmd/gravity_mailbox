@@ -8,14 +8,6 @@
     width: 100%;
   }
 
-  .navbar {
-    background-color: #007bff !important;
-  }
-
-  .navbar-brand > h1 {
-    font-family: 'Righteous', cursive !important;
-  }
-
   .mail-list-column {
     height: 100vh;
     overflow: scroll;
@@ -68,7 +60,36 @@
   }
 <% end %>
 
-<div class="columns mb-0 mt-0">
+<div class="flex">
+  <div class="w-92">
+    <div class="navbar bg-base-100 shadow-sm">
+      <div class="flex-1">
+        <a class="btn btn-ghost text-xl">daisyUI</a>
+      </div>
+      <div class="flex-none">
+
+<div class="dropdown dropdown-end">
+  <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+    <i class="bi bi-three-dots-vertical text-lg"></i>
+  </div>
+  <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+    <li>
+      <%= button_to '/gravity_mailbox/delete_all', method: :post, class: "text-error" do %>
+        <i class="bi bi-trash3"></i>
+        Delete all
+      <% end %>
+    </li>
+  </ul>
+</div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-1">
+
+  </div>
+</div>
+
+<div class="columns mb-0 mt-0" x-data="{ id: null }">
   <div class="column is-one-quarter pt-0 pr-0 mail-list-column">
     <div class="navbar has-background-info">
       <div class="navbar-brand">
@@ -77,11 +98,13 @@
       <div class="navbar-menu">
         <div class="navbar-end">
           <div class="navbar-item">
-            <div class="dropdown is-right" id="toolbar-dropdown">
-              <div class="dropdown-trigger" style="width: 24px; height: 24px;">
-                 <span class="icon has-text-white has-text-centered" aria-controls="dropdown-menu">
-                    <ion-icon size="large" name="menu-outline"></ion-icon>
-                </span>
+            <div class="dropdown is-right">
+              <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                  <i class="icon bi bi-list"></i>
+                </button>
+<!--                 <span class="icon has-text-white has-text-centered" aria-controls="dropdown-menu">-->
+<!--                </span>-->
               </div>
               <div class="dropdown-menu" id="dropdown-menu" role="menu">
                 <div class="dropdown-content">
@@ -89,7 +112,7 @@
                     <%= button_to '/gravity_mailbox/delete_all', class: ['link-button'], method: :post do %>
                       <span class="icon-text">
                         <span class="icon has-text-centered">
-                          <ion-icon name="trash-outline"></ion-icon>
+                          <i class="bi bi-trash3"></i>
                         </span>
                         <span>Delete all</span>
                       </span>
@@ -107,43 +130,47 @@
       <%= render partial: 'mail', locals: { mail: mail, index: index } %>
     <% end %>
   </div>
-  <div class="column pb-0 pt-0 pl-0">
-    <iframe id="iframe-mail-container" seamless name="messageBody" src="<%= params[:id] ? "?part=true&id=#{params[:id]}" : '' %>"></iframe>
+  <div class="column pb-0 pt-0 pl-0" x-data="{ part: 'html' }">
+    <iframe id="iframe-mail-container"
+            seamless
+            name="messageBody"
+            x-bind:src="'/gravity_mailbox?part=' + true + '&id=' + id"
+            ></iframe>
   </div>
 </div>
 
 <script>
-    function closeAllOtherDropdown(e) {
-        document.querySelectorAll(".dropdown").forEach((dropdown) => {
-            dropdown.classList.remove('is-active');
-        })
-    }
+    // function closeAllOtherDropdown(e) {
+    //     document.querySelectorAll(".dropdown").forEach((dropdown) => {
+    //         dropdown.classList.remove('is-active');
+    //     })
+    // }
 
     // Click on mail and change iframe src
-    let mailItems = document.querySelectorAll(".mail-list-item")
-    mailItems.forEach(mailItem => {
-        mailItem.addEventListener("click", () => {
-            document.querySelector("#iframe-mail-container").src = "/gravity_mailbox?part=true&id=" + mailItem.dataset.mailId
-            mailItems.forEach(mailItem => mailItem.classList.remove("selected-mail"))
-            mailItem.classList.add("selected-mail")
-        })
-    })
+    <!-- let mailItems = document.querySelectorAll(".mail-list-item") -->
+    <!-- mailItems.forEach(mailItem => { -->
+        <!-- mailItem.addEventListener("click", () => { -->
+            <!-- document.querySelector("#iframe-mail-container").src = "/gravity_mailbox?part=true&id=" + mailItem.dataset.mailId -->
+            <!-- mailItems.forEach(mailItem => mailItem.classList.remove("selected-mail")) -->
+            <!-- mailItem.classList.add("selected-mail") -->
+        <!-- }) -->
+    <!-- }) -->
 
     // Close all dropdowns if the user clicks outside of them
-    document.addEventListener("click", (e) => {
-        document.querySelectorAll(".dropdown").forEach((dropdown) => {
-            dropdown.classList.remove("is-active")
-        })
-    });
-
-    // Each mail menu dropdown
-    document.querySelectorAll('.dropdown-trigger').forEach((dropdown) => {
-        dropdown.addEventListener('click', function (e) {
-            closeAllOtherDropdown(e)
-            e.target.closest(".dropdown").classList.toggle('is-active');
-            e.stopPropagation();
-        })
-    })
+    // document.addEventListener("click", (e) => {
+    //     document.querySelectorAll(".dropdown").forEach((dropdown) => {
+    //         dropdown.classList.remove("is-active")
+    //     })
+    // });
+    //
+    // // Each mail menu dropdown
+    // document.querySelectorAll('.dropdown-trigger').forEach((dropdown) => {
+    //     dropdown.addEventListener('click', function (e) {
+    //         closeAllOtherDropdown(e)
+    //         e.target.closest(".dropdown").classList.toggle('is-active');
+    //         e.stopPropagation();
+    //     })
+    // })
 
     function displayAutomaticallyTheFirstEmail() {
         const mailItems = document.querySelectorAll(".mail-list-item");

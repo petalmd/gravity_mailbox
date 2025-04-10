@@ -13,9 +13,9 @@ Gem::Specification.new do |spec|
                        'sent by your Rails app directly through your Rails app.'
   spec.homepage      = 'https://github.com/petalmd/gravity_mailbox'
   spec.license       = 'MIT'
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.6.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.7.0')
 
-  spec.files = Dir['LICENSE.txt', 'README.md', 'lib/**/*', 'config/**/*', 'app/**/*']
+  spec.files = Dir['LICENSE.txt', 'README.md', 'lib/**/*', 'config/**/*', 'app/**/*', 'public/**/*']
   spec.extra_rdoc_files = %w[LICENSE.txt README.md]
   spec.require_paths = ['lib']
 
@@ -27,5 +27,6 @@ Gem::Specification.new do |spec|
     'rubygems_mfa_required' => 'true'
   }
 
-  spec.add_dependency 'rails', '>= 6.0'
+  spec.add_dependency 'actionmailer', '>= 7.0'
+  spec.add_dependency 'railties', '>= 7.0'
 end

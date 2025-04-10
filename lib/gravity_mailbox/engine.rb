@@ -4,7 +4,7 @@ require 'rails'
 require_relative 'rails_cache_delivery_method'
 
 module GravityMailbox
-  class Engine < ::Rails::Engine # :nodoc:
+  class Engine < ::Rails::Engine
     isolate_namespace(GravityMailbox)
 
     initializer 'gravity_mailbox.add_delivery_method' do
@@ -14,6 +14,10 @@ module GravityMailbox
           RailsCacheDeliveryMethod
         )
       end
+    end
+
+    initializer "gravity_mailbox.static_assets" do |app|
+      app.middleware.use ::ActionDispatch::Static, "#{root}/public"
     end
   end
 end

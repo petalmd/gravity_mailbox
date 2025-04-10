@@ -1,5 +1,7 @@
 
-<div class="mail-list-item <%= mail.message_id == params[:id] ? 'selected-mail' : '' %>" data-mail-id="<%= mail.message_id %>">
+<div class="mail-list-item <%= mail.message_id == params[:id] ? 'selected-mail' : '' %>"
+     data-mail-id="<%= mail.message_id %>"
+x-on:click="id = '<%= mail.message_id %>'">
   <div class="level" style="margin-bottom: 12px">
     <div class="level-left" style="width: 80%">
       <span class="has-text-weight-semibold	mail-subject"><%= mail.subject %></span>
@@ -7,18 +9,14 @@
     <div class="level-right">
       <div class="dropdown is-right">
         <div class="dropdown-trigger" style="width: 24px; height: 24px;">
-          <span class="icon">
-            <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-          </span>
+          <i class="bi bi-three-dots-vertical"></i>
         </div>
         <div class="dropdown-menu" id="dropdown-menu" role="menu">
           <div class="dropdown-content">
             <div class="dropdown-item">
               <%= link_to "/gravity_mailbox/download_eml?id=#{mail.message_id}", class: ['link-button'] do %>
                     <span class="icon-text">
-                      <span class="icon has-text-centered">
-                        <ion-icon name="download-outline"></ion-icon>
-                      </span>
+                      <i class="bi bi-download"></i>
                       <span>Download .eml</span>
                     </span>
               <% end %>
@@ -27,9 +25,7 @@
             <div class="dropdown-item">
               <%= button_to "/gravity_mailbox/delete?id=#{mail.message_id}", class: ['link-button'], method: :post do %>
                     <span class="icon-text">
-                      <span class="icon has-text-centered">
-                        <ion-icon name="trash-outline"></ion-icon>
-                      </span>
+                      <i class="bi bi-trash3"></i>
                       <span>Delete</span>
                     </span>
               <% end %>
