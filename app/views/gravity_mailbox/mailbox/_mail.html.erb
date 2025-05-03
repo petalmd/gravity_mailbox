@@ -1,47 +1,45 @@
-
-<div class="mail-list-item <%= mail.message_id == params[:id] ? 'selected-mail' : '' %>"
-     data-mail-id="<%= mail.message_id %>"
-x-on:click="id = '<%= mail.message_id %>'">
-  <div class="level" style="margin-bottom: 12px">
-    <div class="level-left" style="width: 80%">
-      <span class="has-text-weight-semibold	mail-subject"><%= mail.subject %></span>
+<div data-mail-id="<%= mail.message_id %>"
+     class="card p-4 transition-all duration-200 cursor-pointer border-l-4 border-transparent"
+     :class="id == '<%= mail.message_id %>' ? 'bg-base-200 border-l-4 border-secondary shadow-md' : 'hover:shadow-lg'"
+     x-on:click="id = '<%= mail.message_id %>'">
+  <div class="flex justify-between items-center mb-3">
+    <div class="w-4/5 truncate">
+      <span class="font-semibold text-base-content"><%= mail.subject %></span>
     </div>
-    <div class="level-right">
-      <div class="dropdown is-right">
-        <div class="dropdown-trigger" style="width: 24px; height: 24px;">
+    <div class="flex items-center">
+      <div class="dropdown dropdown-end">
+        <label tabindex="0" class="btn btn-ghost btn-sm btn-circle text-lg">
           <i class="bi bi-three-dots-vertical"></i>
-        </div>
-        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-          <div class="dropdown-content">
-            <div class="dropdown-item">
-              <%= link_to "/gravity_mailbox/download_eml?id=#{mail.message_id}", class: ['link-button'] do %>
-                    <span class="icon-text">
-                      <i class="bi bi-download"></i>
-                      <span>Download .eml</span>
-                    </span>
-              <% end %>
-            </div>
-
-            <div class="dropdown-item">
-              <%= button_to "/gravity_mailbox/delete?id=#{mail.message_id}", class: ['link-button'], method: :post do %>
-                    <span class="icon-text">
-                      <i class="bi bi-trash3"></i>
-                      <span>Delete</span>
-                    </span>
-              <% end %>
-            </div>
-          </div>
-        </div>
+        </label>
+        <ul tabindex="0" class="dropdown-content menu shadow bg-base-100 w-52">
+          <li>
+            <%= link_to "/gravity_mailbox/download_eml?id=#{mail.message_id}" do %>
+              <i class="bi bi-download"></i>
+              <span>Download .eml</span>
+            <% end %>
+          </li>
+          <li>
+            <%= button_to "/gravity_mailbox/delete?id=#{mail.message_id}",
+                          method: :post,
+                          class: "w-full text-left",
+                          onclick: "return confirm('Are you sure you want to delete this email?');" do %>
+              <i class="bi bi-trash3"></i>
+              <span>Delete</span>
+            <% end %>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 
-  <% mail.to.each do |email_to| %>
-    <%= content_tag(:p, email_to, class: ['has-text-weight-light'], style: "font-size: 0.85rem") %>
-  <% end %>
-  <div class="has-text-right">
-    <span class="is-size-7" title="<%= I18n.l(mail.date, format: :long) %>">
-        <%= time_ago_in_words(mail.date) %>
-      </span>
+  <div class="space-y-1 mb-2">
+    <% mail.to.each do |email_to| %>
+      <p class="text-sm text-base-content/70"><%= email_to %></p>
+    <% end %>
+  </div>
+  <div class="text-right">
+    <span class="text-xs text-base-content/60" title="<%= I18n.l(mail.date, format: :long) %>">
+      <%= time_ago_in_words(mail.date) %> ago
+    </span>
   </div>
 </div>

@@ -12,6 +12,7 @@ group 'development' do
   gem 'rubocop-rspec'
   gem 'combustion'
   gem 'tailwindcss-ruby'
+  gem 'rerun'
 end
 
 group 'test' do
