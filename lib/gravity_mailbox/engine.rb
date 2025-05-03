@@ -16,7 +16,7 @@ module GravityMailbox
       end
     end
 
-    initializer "gravity_mailbox.static_assets" do |app|
+    initializer 'gravity_mailbox.static_assets' do |app|
       app.middleware.use ::ActionDispatch::Static, "#{root}/public"
     end
   end

@@ -6,13 +6,13 @@ source 'https://rubygems.org'
 gemspec
 
 group 'development' do
+  gem 'combustion'
   gem 'puma'
   gem 'rake'
+  gem 'rerun'
   gem 'rubocop'
   gem 'rubocop-rspec'
-  gem 'combustion'
   gem 'tailwindcss-ruby'
-  gem 'rerun'
 end
 
 group 'test' do
@@ -20,4 +20,3 @@ group 'test' do
   gem 'rspec'
   gem 'rspec-rails'
 end
-
