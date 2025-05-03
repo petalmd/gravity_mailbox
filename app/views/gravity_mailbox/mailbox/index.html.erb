@@ -11,9 +11,9 @@
 
 <div class="flex" x-data="{ part: 'html', id: '' }">
   <div class="w-92">
-    <div class="navbar bg-[#007bff] shadow-sm">
+    <div class="navbar bg-[#007bff] shadow-sm font-['Righteous']">
       <div class="flex-1">
-        <span class="btn btn-ghost text-xl text-white">GravityMailbox</span>
+        <span class="pl-4 text-xl text-white">GravityMailbox</span>
       </div>
       <div class="flex-none">
         <div class="dropdown dropdown-end">
@@ -22,7 +22,7 @@
           </div>
           <ul tabindex="0" class="dropdown-content menu shadow-sm bg-base-100 w-52">
             <li>
-              <%= button_to '/gravity_mailbox/delete_all', method: :post, onclick: "return confirm('Are you sure you want to delete all emails?');" do %>
+              <%= button_to delete_all_path, method: :post, onclick: "return confirm('Are you sure you want to delete all emails?');" do %>
                 <i class="bi bi-trash3"></i>
                 Delete all
               <% end %>
@@ -38,12 +38,12 @@
     </div>
 
   </div>
-  <div class="flex-1">
+  <div class="flex-1 border-l-1 border-base-200">
     <div class="column pb-0 pt-0 pl-0">
       <iframe id="iframe-mail-container"
               seamless
               name="messageBody"
-              x-bind:src="'/gravity_mailbox?part=' + true + '&id=' + id"
+              x-bind:src="'<%= index_path(part: true) %>' + '&id=' + id"
       ></iframe>
     </div>
   </div>

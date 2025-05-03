@@ -13,14 +13,15 @@
         </label>
         <ul tabindex="0" class="dropdown-content menu shadow bg-base-100 w-52">
           <li>
-            <%= link_to "/gravity_mailbox/download_eml?id=#{mail.message_id}" do %>
+            <%= link_to download_eml_path(id: mail.message_id) do %>
               <i class="bi bi-download"></i>
               <span>Download .eml</span>
             <% end %>
           </li>
           <li>
-            <%= button_to "/gravity_mailbox/delete?id=#{mail.message_id}",
+            <%= button_to delete_path(id: mail.message_id),
                           method: :post,
+                          form_class: "block",
                           class: "w-full text-left",
                           onclick: "return confirm('Are you sure you want to delete this email?');" do %>
               <i class="bi bi-trash3"></i>
