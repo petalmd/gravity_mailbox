@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import "tailwindcss";
+
+@plugin "./daisyui.js"  {
+    themes: light --default, dark --prefersdark, corporate;
+}

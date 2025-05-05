@@ -66,6 +66,10 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Use `bundle exec rackup` to test locally the gem. Go to [http://localhost:9292](http://localhost:9292)
 Use the button to send a test mail and to see those mail into GravityMailbox.
 
+```shell
+foreman start
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/petalmd/gravity_mailbox.
