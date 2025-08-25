@@ -8,7 +8,6 @@ gemspec
 gem 'base64'
 gem 'bigdecimal'
 gem 'combustion'
-gem 'concurrent-ruby', '1.3.4'
 gem 'drb'
 gem 'mutex_m'
 gem 'net-http', '0.2.2'
