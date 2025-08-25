@@ -176,9 +176,9 @@ DEPENDENCIES
   drb
   gravity_mailbox!
   mutex_m
-  net-http (= 0.2.2)
+  net-http
   rails-controller-testing
-  rake (~> 13.0)
+  rake
   rspec
   rspec-rails
   rubocop
