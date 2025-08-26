@@ -29,7 +29,7 @@ RSpec.describe GravityMailbox::RailsCacheDeliveryMethod do
       )
     end
 
-    context 'envelope validation' do
+    describe 'envelope validation' do
       context 'when mail has no sender' do
         let(:mail) do
           Mail.new.tap do |m|
