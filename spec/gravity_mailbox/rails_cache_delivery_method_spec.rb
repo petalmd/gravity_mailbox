@@ -7,6 +7,8 @@ RSpec.describe GravityMailbox::RailsCacheDeliveryMethod do
     let(:mail) do
       Mail.new.tap do |m|
         m.message_id = '123'
+        m.from = 'sender@example.com'
+        m.to = 'recipient@example.com'
       end
     end
 
@@ -25,6 +27,48 @@ RSpec.describe GravityMailbox::RailsCacheDeliveryMethod do
         'gravity_mailbox/list',
         ["gravity_mailbox/#{mail.message_id}"]
       )
+    end
+
+    context 'envelope validation' do
+      context 'when mail has no sender' do
+        let(:mail) do
+          Mail.new.tap do |m|
+            m.message_id = '123'
+            m.to = 'recipient@example.com'
+          end
+        end
+
+        it 'raises an error' do
+          expect { delivering }.to raise_error(ArgumentError, /SMTP From address may not be blank/)
+        end
+      end
+
+      context 'when mail has no recipients' do
+        let(:mail) do
+          Mail.new.tap do |m|
+            m.message_id = '123'
+            m.from = 'sender@example.com'
+          end
+        end
+
+        it 'raises an error' do
+          expect { delivering }.to raise_error(ArgumentError, /SMTP To address may not be blank/)
+        end
+      end
+
+      context 'when mail has invalid from address' do
+        let(:mail) do
+          Mail.new.tap do |m|
+            m.message_id = '123'
+            m.from = ''
+            m.to = 'recipient@example.com'
+          end
+        end
+
+        it 'raises an error' do
+          expect { delivering }.to raise_error(ArgumentError, /SMTP From address may not be blank/)
+        end
+      end
     end
   end
 
