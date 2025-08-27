@@ -14,6 +14,10 @@ module GravityMailbox
     end
 
     def deliver!(mail)
+      # https://github.com/mikel/mail/blob/d1d65b370b109b98e673a934e8b70a0c1f58cc59/lib/mail/network/delivery_methods/test_mailer.rb#L39
+      # Create the envelope to validate it
+      Mail::SmtpEnvelope.new(mail)
+
       key = "#{KEY_PREFIX}#{mail.message_id}"
       Rails.cache.write(key, mail.encoded, expires_in: 1.week) # TODO: setting for expiration
       actual_list = self.class.mail_keys
