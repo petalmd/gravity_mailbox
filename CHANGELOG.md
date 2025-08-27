@@ -1,5 +1,8 @@
 # Changelog
 
+>[!NOTE]
+> See [Releases](https://github.com/petalmd/gravity_mailbox/releases) for a full changelog.
+
 ## main (unreleased)
 
 ## v0.4.1 (2023-06-18)

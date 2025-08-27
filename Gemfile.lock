@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gravity_mailbox (0.4.1)
+    gravity_mailbox (0.5.0)
       actionmailer (>= 7.0)
       railties (>= 7.0)
 
